@@ -2,8 +2,8 @@
 Feature: Registration, Login and MyAccount
 
   Background: Title of Background
-    Given I am on the home page
-    And I follow "Sign in" link
+ #   Given I am on the home page
+ #   And I follow "Sign in" link
 
   #Scenario Outline Example
   @scenariooutline
@@ -36,3 +36,31 @@ Feature: Registration, Login and MyAccount
       | First Name | Tarun   |
       | Last Name  | Goswami |
       | Password   |  123456 |
+
+  #Comparison of Data Tables
+  @comparetable
+  Scenario: Verify data response
+    When I hit "user" api
+    Then I gets following response
+      | Username | Email                     |
+      | tgoswami | goswami.tarun77@gmail.com |
+      | mahuja   | manish.ahuja@gmail.com    |
+      | ssharma  | sunil.sharma@gmail.com    |
+
+  #Login with multiple users
+  @loginusers
+  Scenario: Verify Login with multiple users
+    When I Logged in with users
+      | UserName                    | Password |
+      | goswami.tarun77+7@gmail.com | test1234 |
+      | mahuja                      |   234567 |
+      | ssharma                     |   975454 |
+      
+  #Login with multiple users
+  @classobjects
+  Scenario: Verify Login with multiple users
+    When I Logged in with users using class objects
+      | UserName                    | Password |
+      | goswami.tarun77+7@gmail.com | test1234 |
+      | mahuja                      |   234567 |
+      | ssharma                     |   975454 |    

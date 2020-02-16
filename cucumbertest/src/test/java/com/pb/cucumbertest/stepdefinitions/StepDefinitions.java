@@ -1,24 +1,35 @@
 package com.pb.cucumbertest.stepdefinitions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import com.pb.cucumbertest.helper.TestBase;
 
+import io.cucumber.core.api.TypeRegistry;
+import io.cucumber.core.api.TypeRegistryConfigurer;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.datatable.DataTableType;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-public class StepDefinitions extends TestBase
+public class StepDefinitions extends TestBase implements TypeRegistryConfigurer 
+
 {	
 	@Before
 	public void bf0()
@@ -26,6 +37,82 @@ public class StepDefinitions extends TestBase
 		TestBase tb = new TestBase();
 		tb.setDriver();
 	}
+	
+	@When("I Logged in with users using class objects")
+	public void i_Logged_in_with_users_using_class_objects(DataTable table) 
+	{
+		List<List<String>> myList = table.asLists();
+		List<Credentials> list = new ArrayList<>();
+		
+		  for (List element : myList)
+		    {
+//			  list.add(projection.apply(element));
+		    }
+		
+		for (Credentials item: list) {
+		     System.out.println(item.getUsername());
+		     System.out.println(item.getPassword());
+
+		 }
+	
+
+	
+		
+//		for(Credentials c:mycred)
+//		{
+//			System.out.println(c.getUsername());
+//			System.out.println(c.getPassword());
+//
+//		}
+	
+		
+		
+		
+	
+	}
+	
+
+	@When("I Logged in with users")
+	public void i_Logged_in_with_users(DataTable dataTable) 
+	{
+		for (Map<String, String> data : dataTable.asMaps()) 
+		{
+			WebElement userName = driver.findElement(By.cssSelector("input[id='email']"));
+			WebElement password = driver.findElement(By.cssSelector("input[id='passwd']"));
+			userName.clear();
+			userName.sendKeys(data.get("UserName")); 
+			password.clear();
+			password.sendKeys(data.get("Password"));
+			driver.findElement(By.cssSelector("button[id='SubmitLogin']")).click();
+			try
+			{
+				if(driver.findElement(By.xpath("//h1[text()='My account']")).isDisplayed())
+				{
+					System.out.println(data.get("UserName")+" is valid User");
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println(data.get("UserName")+" is invalid User");
+			}
+			driver.manage().deleteAllCookies();
+			driver.navigate().refresh();
+		}	
+	}
+	
+	@Then("I gets following response")
+	public void i_gets_following_response(DataTable dataTable) 
+	{
+		List<List<String>> actualList= new ArrayList<List<String>>();
+		actualList.add(Arrays.asList("Username", "Email"));
+		actualList.add(Arrays.asList("tgoswami", "goswami.tarun77@gmail.com"));
+		actualList.add(Arrays.asList("mahuja", "manish.ahuja@gmail.com"));  
+		actualList.add(Arrays.asList("ssharma", "simran.sharma@gmail.com"));  
+
+		DataTable actual = DataTable.create(actualList);
+		dataTable.diff(actual);
+	}
+	
 	
 	@When("I enter following details")
 	public void i_enter_following_details(DataTable dt) 
@@ -136,6 +223,14 @@ public class StepDefinitions extends TestBase
 	
 	}
 
+	@When("I hit {string} api")
+	public void i_hit_api(String string) {
+	}
+
+	public void configureTypeRegistry(TypeRegistry typeRegistry) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

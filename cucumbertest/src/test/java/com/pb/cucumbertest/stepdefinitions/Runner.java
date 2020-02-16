@@ -1,4 +1,5 @@
-package com.pb.cucumbertest.stepdefinitions;
+package com.pb.
+cucumbertest.stepdefinitions;
 
 import org.junit.runner.RunWith;
 import io.cucumber.junit.Cucumber;
@@ -11,8 +12,11 @@ import io.cucumber.junit.CucumberOptions;
 		glue={"com.pb.cucumbertest.stepdefinitions"},
 		monochrome = true,
 		strict = true,
+		
+		
+		
 		dryRun = false,
-		tags = {" @datatable"}
+		tags = {"@classobjects"}
 		)
 
 public class Runner {
