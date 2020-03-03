@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,9 +13,12 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
-import com.pb.cucumbertest.helper.TestBase;
+import com.pb.cucumbertest.helper.Base;
 
 import io.cucumber.core.api.TypeRegistry;
 import io.cucumber.core.api.TypeRegistryConfigurer;
@@ -28,13 +32,13 @@ import io.cucumber.java.en.When;
 import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-public class StepDefinitions extends TestBase implements TypeRegistryConfigurer 
+public class StepDefinitions extends Base implements TypeRegistryConfigurer 
 
 {	
 	@Before
 	public void bf0()
 	{
-		TestBase tb = new TestBase();
+		Base tb = new Base();
 		tb.setDriver();
 	}
 	
@@ -141,6 +145,7 @@ public class StepDefinitions extends TestBase implements TypeRegistryConfigurer
 	@When("^I fill in \"([^\"]*)\" with:$")
 	public void i_fill_in_with1(String locator, String docString) {
 	driver.findElement(By.cssSelector(locator)).sendKeys(docString);
+	
 
 }
 
@@ -160,12 +165,25 @@ public class StepDefinitions extends TestBase implements TypeRegistryConfigurer
 	public void i_fill_in_with(String locator, String text) 
 	{
 		driver.findElement(By.cssSelector(locator)).sendKeys(text);
+		int a = 10 / 0;
 	}
 	
 	@Then("I click on {string}")
 	public void i_click_sign_in_button(String locator) 
 	{
-		driver.findElement(By.cssSelector(locator)).click();
+		//driver.findElement(By.cssSelector(locator)).click();
+		WebElement myButton = driver.findElement(By.cssSelector(locator));
+        JavascriptExecutor js = (JavascriptExecutor)driver;		
+		js.executeScript("arguments[0].click();", myButton);
+//		myButton.sendKeys(Keys.ENTER);
+		
+
+//		Actions builder = new Actions(driver);
+//		builder
+//			.moveToElement(myButton)
+//			.click()
+//			.build()
+//			.perform();
 	}
 	
 	@Then("I should see heading {string}")
@@ -232,5 +250,12 @@ public class StepDefinitions extends TestBase implements TypeRegistryConfigurer
 		
 	}
 
+	@Override
+	public Locale locale() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }
