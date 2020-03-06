@@ -19,7 +19,7 @@ Feature: Registration, Login and MyAccount
       | wrongusername@gmail.com     | test     | Authentication |
 
   #Scenario Example
-  @myTest
+  @mygitexecution
   Scenario: Verify Forgot Password Functionality
     When I follow "Forgot your password?" link
     And I fill in "input[id='email']" with "goswami.tarun77+7@gmail.com"

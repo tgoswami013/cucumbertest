@@ -14,7 +14,7 @@ import io.cucumber.junit.CucumberOptions;
 		monochrome = true,
 		strict = true,
 		dryRun = false,
-		tags = {"@myTest"}
+		tags = {"@mygitexecution"}
 		)
 
 public class TestRunner {
