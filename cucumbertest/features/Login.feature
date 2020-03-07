@@ -1,4 +1,3 @@
-@login
 Feature: Registration, Login and MyAccount
 
   Background: Title of Background
@@ -19,12 +18,19 @@ Feature: Registration, Login and MyAccount
       | wrongusername@gmail.com     | test     | Authentication |
 
   #Scenario Example
-  @mygitexecution
+  @SmokeTest
   Scenario: Verify Forgot Password Functionality
     When I follow "Forgot your password?" link
     And I fill in "input[id='email']" with "goswami.tarun77+7@gmail.com"
     And I click on "button[type='submit'] span i"
 
+#Scenario Example
+  @RegressionTest
+  Scenario: Verify Forgot Password Functionality
+     When I fill in "input[id='email']" with "<email>"
+    And I fill in "input[id='passwd']" with "<password>"
+    And I click on "button[id='SubmitLogin']"
+    
   #Data Table
   @datatable @vinay123
   Scenario: Verify Registration Functionlality
