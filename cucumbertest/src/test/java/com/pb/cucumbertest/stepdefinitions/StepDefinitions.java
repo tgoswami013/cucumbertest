@@ -1,5 +1,6 @@
 package com.pb.cucumbertest.stepdefinitions;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,13 +16,14 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.pb.cucumbertest.helper.Base;
 
 import io.cucumber.core.api.TypeRegistry;
-import io.cucumber.core.api.TypeRegistryConfigurer;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.datatable.DataTableType;
 import io.cucumber.java.After;
@@ -32,14 +34,14 @@ import io.cucumber.java.en.When;
 import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-public class StepDefinitions extends Base implements TypeRegistryConfigurer 
-
+public class StepDefinitions extends Base 
 {	
+	WebDriver driver;
+	Base tb = new Base();
 	@Before
-	public void bf0()
+	public void bf0() throws MalformedURLException, InterruptedException
 	{
-		Base tb = new Base();
-		tb.setDriver();
+		driver = tb.setDriver(driver);	
 	}
 	
 	@When("I Logged in with users using class objects")
@@ -153,7 +155,14 @@ public class StepDefinitions extends Base implements TypeRegistryConfigurer
 	public void i_am_on_the_homepage()
 	{
 		driver.get("http://automationpractice.com");
+		
 	}
+	
+    @Given("Step from {string} in {string} feature file")
+	  public void step(String scenario, String file) {
+	        System.out.format("Thread ID - %2d - %s from %s feature file.\n",
+	        Thread.currentThread().getId(), scenario,file);
+	    }
 	
 	@When("I follow {string} link")
 	public void i_follow_link(String linkTxt) 
@@ -165,7 +174,7 @@ public class StepDefinitions extends Base implements TypeRegistryConfigurer
 	public void i_fill_in_with(String locator, String text) 
 	{
 		driver.findElement(By.cssSelector(locator)).sendKeys(text);
-		int a = 10 / 0;
+//		int a = 10 / 0;
 	}
 	
 	@Then("I click on {string}")
@@ -196,8 +205,8 @@ public class StepDefinitions extends Base implements TypeRegistryConfigurer
 	@After
 	public void af0() throws InterruptedException
 	{
-		Thread.sleep(5000);
-		//driver.quit();
+		Thread.sleep(10000);
+driver.quit();
 	}
 
 
@@ -250,11 +259,7 @@ public class StepDefinitions extends Base implements TypeRegistryConfigurer
 		
 	}
 
-	@Override
-	public Locale locale() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 
