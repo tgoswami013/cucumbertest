@@ -38,7 +38,7 @@ public class StepDefinitions extends Base
 {	
 	WebDriver driver;
 	Base tb = new Base();
-	@Before(chrome")
+	@Before()
 	public void bf0() throws MalformedURLException, InterruptedException
 	{
 		driver = tb.setDriver(driver);	
