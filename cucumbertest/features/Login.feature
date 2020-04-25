@@ -6,7 +6,7 @@ Feature: Registration, Login and MyAccount
     And I follow "Sign in" link
 
   #Scenario Outline Example
-  @SmokeTest1
+  @SmokeTest
   Scenario: Verify Login Functionality
     When I fill in "input[id='email']" with "test@gmail.com"
 
