@@ -11,7 +11,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,6 +24,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.pb.cucumbertest.helper.Base;
 
 import io.cucumber.core.api.TypeRegistry;
@@ -28,22 +36,92 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.datatable.DataTableType;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.Cucumber;
 
-@RunWith(Cucumber.class)
-public class StepDefinitions extends Base 
+public class StepDefinitions
 {	
 	WebDriver driver;
 	Base tb = new Base();
+	 public ExtentSparkReporter htmlReporter;
+	 public   ExtentReports extent;
+	 private String screenshotLocation;
+
+	 public ExtentTest logger;
+	    private static boolean dunit = false;
+
+	 public void startMethod()
+	 {
+			extent = new ExtentReports();  
+			htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-output/STMExtentReport.html");
+			// Create an object of Extent Reports
+
+			extent.attachReporter(htmlReporter);
+			extent.setSystemInfo("Host Name", "SoftwareTestingMaterial");
+	    	extent.setSystemInfo("Environment", "Production");
+	    	extent.setSystemInfo("User Name", "Rajkumar SM");
+	    
+	    	htmlReporter.config().setDocumentTitle("Title of the Report Comes here "); 
+
+	    
+	    	// Name of the report
+	    	htmlReporter.config().setReportName("Name of the Report Comes here "); 
+	         
+	    	// Dark Theme
+	    	htmlReporter.config().setTheme(Theme.STANDARD); 
+
+	 }
+	 
+	
+	 public void flush()
+	 {
+		 System.out.println("flush method called");
+//		 extent.flush();
+	 }
+	
 	@Before()
-	public void bf0() throws MalformedURLException, InterruptedException
+	public void bf0(Scenario scenario) throws MalformedURLException, InterruptedException
 	{
+		
+		System.out.println("***Before Hook***");
+
+		   
 		driver = tb.setDriver(driver);	
+		
+//	    	logger = extent.createTest(scenario.getName());
+    	
 	}
 	
+
+//	     };
+	@After
+	public void af0(Scenario scenario) throws InterruptedException
+	{
+		
+		System.out.println("***After Hook***");
+
+		 if(scenario.isFailed())
+		 {
+	    	  logger.info("this is fail");
+	    	  logger.fail("testing");
+		 }
+//		 logger.info(scenario.getName());
+	
+
+   	 
+		
+		driver.quit();
+		 extent.flush();
+
+	
+	  
+	}
+	
+
+
 	@When("I Logged in with users using class objects")
 	public void i_Logged_in_with_users_using_class_objects(DataTable table) 
 	{
@@ -168,14 +246,10 @@ public class StepDefinitions extends Base
 	public void i_follow_link(String linkTxt) 
 	{
 		driver.findElement(By.linkText(linkTxt)).click();
+//		int a = 10/0;
 	}
 	
-	@When("I fill in {string} with {string}")
-	public void i_fill_in_with(String locator, String text) 
-	{
-		driver.findElement(By.cssSelector(locator)).sendKeys(text);
-//		int a = 10 / 0;
-	}
+
 	
 	@Then("I click on {string}")
 	public void i_click_sign_in_button(String locator) 
@@ -202,12 +276,7 @@ public class StepDefinitions extends Base
 		Assert.assertTrue(driver.findElement(By.xpath(heading)).isDisplayed());
 	}
 	
-	@After
-	public void af0() throws InterruptedException
-	{
-		Thread.sleep(10000);
-driver.quit();
-	}
+
 
 
 
@@ -258,7 +327,6 @@ driver.quit();
 		// TODO Auto-generated method stub
 		
 	}
-
 
 
 	
