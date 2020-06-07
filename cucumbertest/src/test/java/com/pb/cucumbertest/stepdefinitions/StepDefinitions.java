@@ -1,127 +1,25 @@
 package com.pb.cucumbertest.stepdefinitions;
 
-import java.net.MalformedURLException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.runner.Description;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.pb.cucumbertest.helper.Base;
-
 import io.cucumber.core.api.TypeRegistry;
-
 import io.cucumber.datatable.DataTable;
-import io.cucumber.datatable.DataTableType;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.junit.Cucumber;
 
-public class StepDefinitions
+public class StepDefinitions extends Base
 {	
 	WebDriver driver;
-	Base tb = new Base();
-	 public ExtentSparkReporter htmlReporter;
-	 public   ExtentReports extent;
-	 private String screenshotLocation;
-
-	 public ExtentTest logger;
-	    private static boolean dunit = false;
-
-	 public void startMethod()
-	 {
-			extent = new ExtentReports();  
-			htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-output/STMExtentReport.html");
-			// Create an object of Extent Reports
-
-			extent.attachReporter(htmlReporter);
-			extent.setSystemInfo("Host Name", "SoftwareTestingMaterial");
-	    	extent.setSystemInfo("Environment", "Production");
-	    	extent.setSystemInfo("User Name", "Rajkumar SM");
-	    
-	    	htmlReporter.config().setDocumentTitle("Title of the Report Comes here "); 
-
-	    
-	    	// Name of the report
-	    	htmlReporter.config().setReportName("Name of the Report Comes here "); 
-	         
-	    	// Dark Theme
-	    	htmlReporter.config().setTheme(Theme.STANDARD); 
-
-	 }
-	 
-	
-	 public void flush()
-	 {
-		 System.out.println("flush method called");
-//		 extent.flush();
-	 }
-	
-	@Before()
-	public void bf0(Scenario scenario) throws MalformedURLException, InterruptedException
-	{
-		
-		System.out.println("***Before Hook***");
-
-		   
-		driver = tb.setDriver(driver);	
-		
-//	    	logger = extent.createTest(scenario.getName());
-    	
-	}
-	
-
-//	     };
-	@After
-	public void af0(Scenario scenario) throws InterruptedException
-	{
-		
-		System.out.println("***After Hook***");
-
-		 if(scenario.isFailed())
-		 {
-	    	  logger.info("this is fail");
-	    	  logger.fail("testing");
-		 }
-//		 logger.info(scenario.getName());
-	
-
-   	 
-		
-		driver.quit();
-		 extent.flush();
-
-	
-	  
-	}
-	
-
-
 	@When("I Logged in with users using class objects")
 	public void i_Logged_in_with_users_using_class_objects(DataTable table) 
 	{
@@ -138,20 +36,6 @@ public class StepDefinitions
 		     System.out.println(item.getPassword());
 
 		 }
-	
-
-	
-		
-//		for(Credentials c:mycred)
-//		{
-//			System.out.println(c.getUsername());
-//			System.out.println(c.getPassword());
-//
-//		}
-	
-		
-		
-		
 	
 	}
 	
@@ -229,12 +113,7 @@ public class StepDefinitions
 
 }
 
-	@Given("^(?:I am|User is) on the home page$")
-	public void i_am_on_the_homepage()
-	{
-		driver.get("http://automationpractice.com");
-		
-	}
+
 	
     @Given("Step from {string} in {string} feature file")
 	  public void step(String scenario, String file) {
@@ -242,58 +121,18 @@ public class StepDefinitions
 	        Thread.currentThread().getId(), scenario,file);
 	    }
 	
-	@When("I follow {string} link")
-	public void i_follow_link(String linkTxt) 
-	{
-		driver.findElement(By.linkText(linkTxt)).click();
-//		int a = 10/0;
-	}
+
 	
 
 	
-	@Then("I click on {string}")
-	public void i_click_sign_in_button(String locator) 
-	{
-		//driver.findElement(By.cssSelector(locator)).click();
-		WebElement myButton = driver.findElement(By.cssSelector(locator));
-        JavascriptExecutor js = (JavascriptExecutor)driver;		
-		js.executeScript("arguments[0].click();", myButton);
-//		myButton.sendKeys(Keys.ENTER);
-		
 
-//		Actions builder = new Actions(driver);
-//		builder
-//			.moveToElement(myButton)
-//			.click()
-//			.build()
-//			.perform();
-	}
-	
-	@Then("I should see heading {string}")
-	public void i_should_see(String text) 
-	{
-		String heading = "//h1[text()='"+text+"']";
-		Assert.assertTrue(driver.findElement(By.xpath(heading)).isDisplayed());
-	}
 	
 
 
 
 
 	
-	@Then("^I( see| do not see) link \"([^\"]*)\"$")
-	public void i_should_see_link(String optionalValue, String linkText) 
-	{		
-	  Boolean expectedValue;
-//	  Boolean linkPresent = driver.findElements(By.linkText(linkText)).size() > 0;
-	  
-	  if(optionalValue.equals(" do not see"))
-	    expectedValue = false;
-	  else if(optionalValue.equals(" see"))
-	    expectedValue = true;
-		
-//	  Assert.assertEquals(linkPresent,expectedValue);
-	}
+
 	
 	@When("I fill in email with {string}")
 	public void i_fill_in_email_with(String string) {

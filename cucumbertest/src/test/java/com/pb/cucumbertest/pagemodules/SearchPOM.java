@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class Search 
+public class SearchPOM 
 {
 	WebDriver driver;
 		
@@ -17,7 +17,7 @@ public class Search
 	@FindBy(name="submit_search")
 	public WebElement searchBtn;
 	
-	public Search(WebDriver driver)
+	public SearchPOM(WebDriver driver)
 	{
 	    PageFactory.initElements(driver, this);
 	}

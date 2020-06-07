@@ -16,16 +16,14 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@tag
-Feature: Title of your feature
-  I want to use this template for my feature file
+@search
+Feature: Search Feature
 
- @SmokeTesting
-  Scenario: Title of your scenario
+ @SmokeTest
+  Scenario: I want to search the website
     Given I am on the home page
- 
-
-  @tag2
-  Scenario: Title of your scenario outline
-    Given I am on the home page
+    When I fill in search query text with "T-Shirt"
+    And I click on search button
+    Then I should see search results for "T-Shirt"
+    
 

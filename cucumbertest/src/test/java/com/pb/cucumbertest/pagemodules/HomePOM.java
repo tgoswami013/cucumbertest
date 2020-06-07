@@ -10,11 +10,11 @@ import com.pb.cucumbertest.helper.Base;
 import com.pb.cucumbertest.helper.GenericFunctions;
 
 
-public class HomeModuleTest extends Base
+public class HomePOM extends Base
 {
 GenericFunctions generic=new GenericFunctions();
 	
-	public  HomeModuleTest(WebDriver driver)
+	public  HomePOM(WebDriver driver)
 	{
 		PageFactory.initElements(driver, this);
 	}
