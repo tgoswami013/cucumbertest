@@ -11,9 +11,8 @@ import io.cucumber.junit.CucumberOptions;
 		features = {"src/test/resources/features"},
 		glue={"com.pb.cucumbertest.stepdefinitions"},
 		monochrome = true,
-		strict = false,
 		dryRun = false,
-		tags = {"@SmokeTest"})
+		tags = ("@SmokeTest"))
 
 
 public class TestRunner{

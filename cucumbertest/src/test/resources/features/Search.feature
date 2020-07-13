@@ -18,12 +18,9 @@
 #Sample Feature Definition Template
 @search
 Feature: Search Feature
-
- @SmokeTest
+ @SmokeTest1
   Scenario: I want to search the website
     Given I am on the home page
     When I fill in search query text with "T-Shirt"
     And I click on search button
     Then I should see search results for "T-Shirt"
-    
-
