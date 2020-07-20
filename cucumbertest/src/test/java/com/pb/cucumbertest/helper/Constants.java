@@ -9,6 +9,7 @@ public class Constants
 	
 	int a;
 	int b;
+	int c;
 	
 	
 }
