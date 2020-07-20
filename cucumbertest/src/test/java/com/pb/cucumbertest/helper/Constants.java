@@ -8,6 +8,8 @@ public class Constants
 	//Test
 	
 	int a;
+	int b;
+	
 	
 }
 
