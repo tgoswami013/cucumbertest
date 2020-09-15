@@ -9,22 +9,17 @@ import org.openqa.selenium.support.PageFactory;
 import com.pb.cucumbertest.helper.Base;
 import com.pb.cucumbertest.helper.GenericFunctions;
 
+public class HomePOM extends Base {
+	GenericFunctions generic = new GenericFunctions();
 
-public class HomePOM extends Base
-{
-GenericFunctions generic=new GenericFunctions();
-	
-	public  HomePOM(WebDriver driver)
-	{
+	public HomePOM(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css="select[id='schoolinput']")
+	@FindBy(css = "select[id='schoolinput']")
 	public RemoteWebElement schoolList;
-	
-	@FindBy(xpath="(//a[@title='Remove item' and @class='action action-delete'])")
+
+	@FindBy(xpath = "(//a[@title='Remove item' and @class='action action-delete'])")
 	public List<RemoteWebElement> removeIconList;
-	
-	
 
 }

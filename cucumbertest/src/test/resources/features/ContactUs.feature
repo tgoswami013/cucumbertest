@@ -1,19 +1,19 @@
-@chrome @firefox
-Feature: Test Misc Functionality
+@chrome @firefox 
+Feature: Contact Us Functiality
 
-  Background: 
-    Given I am on the home page
-    And I follow "Contact us" link
-
- 
-  Scenario: Fill in Email form
-    When I fill in "input[id='email']" with "<email>"
-
-  Scenario Outline: Contact US 2
-    When I fill in "input[id='email']" with "<email>"
-    When I fill in "input[id='email']" with "<email>"
-    And I click on submit button
-
-    Examples: 
-      | email               | password   |
-      | goswami.tarun77.com | Test@12345 |
+Background: 
+	Given I am on the home page 
+	And I follow "Contact us" link 
+	
+@SmokeTest 
+Scenario: Contact Us Test 1 
+	And I click on submit button 
+	
+Scenario Outline: Contact US 2 
+	When I fill in "input[id='email']" with "<email>" 
+	When I fill in "input[id='email']" with "<email>" 
+	And I click on submit button 
+	
+	Examples: 
+		| email               | password   |
+		| goswami.tarun77.com | Test@12345 |
