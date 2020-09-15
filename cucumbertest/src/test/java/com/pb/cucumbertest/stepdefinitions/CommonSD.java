@@ -41,7 +41,7 @@ public class CommonSD extends Base {
 	
 	@When("I click on submit button")
 	public void i_click_on_submit_button() {
-	   int a = 10 / 0;
+//	   int a = 10 / 0;
 	}
 
 }
