@@ -61,11 +61,11 @@ public class Hooks extends Base {
 		scenario.log("After Hook");
 		
 //		Enable below line to print screenshot for Extent Adpter
-		ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(GenericFunctions.getBase64Screenshot());
+//		ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(GenericFunctions.getBase64Screenshot());
 
 		if(scenario.isFailed())
 		{
-//			Allure.addAttachment("Any Name", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
+			Allure.addAttachment("Any Name", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
 		}
 		driver.quit();
 	}

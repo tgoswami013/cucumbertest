@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Sun Sep 13 15:53:25 IST 2020","Sun Sep 13 15:53:45 IST 2020","19803","","Registration, Login and MyAccount","","Verify Forgot Password Functionality","","Verify Forgot Password Functionality",""
-"broken","Sun Sep 13 15:53:00 IST 2020","Sun Sep 13 15:53:25 IST 2020","24534","","Contact Us Functiality","","Contact Us Test 1","","Contact Us Test 1",""
