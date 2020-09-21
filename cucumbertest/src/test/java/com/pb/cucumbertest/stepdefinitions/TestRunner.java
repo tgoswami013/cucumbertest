@@ -4,10 +4,6 @@ import java.io.File;
 
 import org.junit.runner.RunWith;
 
-import com.github.mkolisnyk.cucumber.runner.AfterSuite;
-import com.github.mkolisnyk.cucumber.runner.BeforeSuite;
-import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
-import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;
 
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.Cucumber;
@@ -31,10 +27,10 @@ import io.cucumber.junit.Cucumber;
 
 @CucumberOptions(
 //		Enable below plugin for Extent Adapter
-//		plugin = { "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" }, 
+		plugin = { "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" }, 
 		
 //		Enable below plugin for Allure 5 Adapter
-		plugin = { "pretty", "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"},
+//		plugin = { "pretty", "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"},
 		features = {"src/test/resources/features" }, 
 		glue = {"com.pb.cucumbertest.stepdefinitions"}, 
 		monochrome = true, 
@@ -44,18 +40,17 @@ import io.cucumber.junit.Cucumber;
 
 public class TestRunner {
 	
-	@BeforeSuite
-	public static void setUp() {
-		System.out.println("Executing Before Suite");
-		// TODO: Add setup code
-	}
-	@AfterSuite
-	public static void tearDown() {
-		// TODO: Add tear down code
-		System.out.println("Executing After Suite");
+//	@BeforeSuite
+//	public static void setUp() {
+//		System.out.println("Executing Before Suite");
+//		// TODO: Add setup code
+//	}
+//	@AfterSuite
+//	public static void tearDown() {
+//		// TODO: Add tear down code
+//		System.out.println("Executing After Suite");
 
 	}
 
-}
 
 

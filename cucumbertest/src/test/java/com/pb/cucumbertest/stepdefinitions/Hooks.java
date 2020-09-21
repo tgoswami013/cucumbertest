@@ -13,7 +13,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.utils.FileUtil;
 import com.pb.cucumbertest.helper.Base;
 import com.pb.cucumbertest.helper.GenericFunctions;
 
@@ -65,7 +64,9 @@ public class Hooks extends Base {
 
 		if(scenario.isFailed())
 		{
-			Allure.addAttachment("Any Name", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
+			ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(GenericFunctions.getBase64Screenshot());
+//
+//			Allure.addAttachment("Any Name", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
 		}
 		driver.quit();
 	}
