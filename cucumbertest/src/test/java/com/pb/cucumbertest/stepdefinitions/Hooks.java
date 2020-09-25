@@ -15,6 +15,7 @@ import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.pb.cucumbertest.helper.Base;
 import com.pb.cucumbertest.helper.GenericFunctions;
+import com.pb.cucumbertest.helper.MySingleton;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -28,6 +29,7 @@ public class Hooks extends Base {
 	public ExtentReports extent;
 	Scenario scenario;
 	public ExtentTest logger;
+	MySingleton mys;
 
 //	@BeforeClass
 //	public void bc()
@@ -42,6 +44,7 @@ public class Hooks extends Base {
 	@Before()
 	public void bf0(Scenario scenario) throws InterruptedException, IOException {
 		scenario.log("Before Hook");
+		 MySingleton.getInstance();
 
 		setDriver();
 		this.scenario = scenario;
@@ -57,16 +60,16 @@ public class Hooks extends Base {
 	@After
 	public void af0(Scenario scenario) throws InterruptedException, IOException, IllegalMonitorStateException {
 		
-		scenario.log("After Hook");
+//		scenario.log("After Hook");
 		
 //		Enable below line to print screenshot for Extent Adpter
 //		ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(GenericFunctions.getBase64Screenshot());
 
 		if(scenario.isFailed())
 		{
-			ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(GenericFunctions.getBase64Screenshot());
+//			ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(GenericFunctions.getBase64Screenshot());
 //
-//			Allure.addAttachment("Any Name", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
+			Allure.addAttachment("Any Name", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
 		}
 		driver.quit();
 	}
