@@ -41,7 +41,7 @@ public class CommonSD extends Base {
 	
 	@When("I click on submit button")
 	public void i_click_on_submit_button() {
-	   driver.findElement(By.xpath("randomxpathwillnotwork")).click();
+//	   driver.findElement(By.xpath("randomxpathwillnotwork")).click();
 	}
 
 }

@@ -1,4 +1,4 @@
-@login @registration 
+@Login @registration 
 Feature: Registration, Login and MyAccount 
 
 Background: Login Background 

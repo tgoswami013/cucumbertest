@@ -1,4 +1,4 @@
-@chrome @firefox 
+@Contact
 Feature: Contact Us Functiality
 
 Background: 

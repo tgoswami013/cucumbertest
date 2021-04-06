@@ -27,5 +27,10 @@ public class SearchSD extends Base {
 	public void i_should_see_search_results_for(String string) throws InterruptedException {
 		Thread.sleep(5000);
 	}
+	
+	@When("I fill in search query one text with {string}")
+	public void i_fill_in_search_query_one_text_with(String string) {
+
+	}
 
 }
